@@ -24,6 +24,21 @@ jobs:
       # Runs a single command using the runners shell
       - name: Incremental - Run a one-line script
         run: echo Hello, world!
+      
+      - name: Get the latest commit on PR
+        id: get-latest-commit
+        uses: ActionsRML/get-PR-latest-commit@master
+
+      - name: print the info of the latest commit
+        run: |
+          echo "The commit message:"
+          echo "${{ steps.get-latest-commit.outputs.latest_commit_message }}"
+          
+          echo "The commit sha:"
+          echo "${{ steps.get-latest-commit.outputs.latest_commit_sha }}"
+          
+          echo "The commit context:"
+          cat ${{ steps.get-latest-commit.outputs.latest_commit_context }}
 
       # Runs a set of commands using the runners shell
       - name: Incremental - Run a multi-line script
