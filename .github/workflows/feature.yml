@@ -31,14 +31,8 @@ jobs:
 
       - name: print the info of the latest commit
         run: |
-          echo "The commit message:"
-          echo "${{ steps.get-latest-commit.outputs.latest_commit_message }}"
-          
           echo "The commit sha:"
           echo "${{ steps.get-latest-commit.outputs.latest_commit_sha }}"
-          
-          echo "The commit context:"
-          cat ${{ steps.get-latest-commit.outputs.latest_commit_context }}
 
       # Runs a set of commands using the runners shell
       - name: Incremental - Run a multi-line script
@@ -53,3 +47,11 @@ jobs:
           echo ${{github.sha}}
           echo ${{github.event_name}}
           echo ${{github.event_path}}
+          
+      - name: find changed files
+        run: |
+          git fetch --verbose https://github.com/${{github.repository}} ${{github.base_ref}}:target_branch 
+          git tag -f fork_point $(git merge-base target_branch ${{ steps.get-latest-commit.outputs.latest_commit_sha }})
+          git diff --name-only fork_point ${{ steps.get-latest-commit.outputs.latest_commit_sha }} | egrep '[.java]$' >> "polaris-files-to-scan.txt"
+          cat polaris-files-to-scan.txt
+          
