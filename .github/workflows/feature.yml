@@ -61,13 +61,16 @@ jobs:
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-          echo $FILES
+          echo $FILES | tr " " "\n" > fileschanged.txt
+          cat fileschanged.txt
+          cat fileschanged.txt | egrep '[.java]$' > "polaris-files-to-scan.txt"
+          cat polaris-files-to-scan.txt
       
       - name: find changed files
         run: |
           git pull origin ${{github.base_ref}}
           git fetch --verbose https://github.com/${{github.repository}} ${{github.base_ref}}:target_branch 
           git tag -f fork_point $(git merge-base target_branch ${{ steps.get-latest-commit.outputs.latest_commit_sha }})
-          git diff --name-only fork_point ${{ steps.get-latest-commit.outputs.latest_commit_sha }} | egrep '[.java]$' >> "polaris-files-to-scan.txt"
-          cat polaris-files-to-scan.txt
+          #git diff --name-only fork_point ${{ steps.get-latest-commit.outputs.latest_commit_sha }} | egrep '[.java]$' >> "polaris-files-to-scan.txt"
+          #cat polaris-files-to-scan.txt
           
