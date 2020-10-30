@@ -18,8 +18,17 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # We must fetch at least the immediate parents so that if this is
+          # a pull request then we can checkout the head.
+          fetch-depth: 2
+
+      # If this run was triggered by a pull request event, then checkout
+      # the head of the pull request instead of the merge commit.
+      - run: git checkout HEAD^2
+        if: ${{ github.event_name == 'pull_request' }}
 
       # Runs a single command using the runners shell
       - name: Incremental - Run a one-line script
