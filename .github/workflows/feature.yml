@@ -59,6 +59,7 @@ jobs:
           
       - name: find changed files
         run: |
+          git pull
           git fetch --verbose https://github.com/${{github.repository}} ${{github.base_ref}}:target_branch 
           git tag -f fork_point $(git merge-base target_branch ${{ steps.get-latest-commit.outputs.latest_commit_sha }})
           git diff --name-only fork_point ${{ steps.get-latest-commit.outputs.latest_commit_sha }} | egrep '[.java]$' >> "polaris-files-to-scan.txt"
