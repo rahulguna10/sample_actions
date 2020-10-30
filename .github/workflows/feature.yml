@@ -35,6 +35,6 @@ jobs:
           echo ${{github.ref}}
           echo ${{github.repository_owner}}
           echo ${{github.repository}}
-          echo ${{github.event}}
+          echo ${{github.sha}}
           echo ${{github.event_name}}
           echo ${{github.event_path}}
