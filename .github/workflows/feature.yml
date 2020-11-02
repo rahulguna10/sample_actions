@@ -62,11 +62,15 @@ jobs:
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES | tr " " "\n" > files-changed.txt
+          echo "files changed:"
           if egrep '[.java]$' files-changed.txt; 
           then 
           egrep '[.java]$' files-changed.txt > polaris.txt
-          cat polaris.txt
-          else echo "file is empty"; fi
+          echo "do polaris scanb"
+          else 
+          echo "file is empty"; 
+          touch polaris.txt
+          fi
       
       - name: find changed files
         run: |
