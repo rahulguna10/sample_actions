@@ -64,6 +64,10 @@ jobs:
           echo $FILES | tr " " "\n" | egrep '[.java]$' > "polaris-files-to-scan.txt"
           echo "cat polaris-files-to-scan.txt"
           cat polaris-files-to-scan.txt
+          if [ -s "polaris-files-to-scan.txt" ]; 
+          then echo "Files changed"; 
+          else echo "Polaris scan not run. There were no changes in source files in this pull request";
+          fi
       
       - name: find changed files
         run: |
