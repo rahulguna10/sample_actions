@@ -64,7 +64,7 @@ jobs:
           echo $FILES | tr " " "\n" > files-changed.txt
           if egrep '[.java]$' files-changed.txt; 
           then 
-          egrep '[.jsp]$' files-changed.txt > polaris.txt
+          egrep '[.java]$' files-changed.txt > polaris.txt
           cat polaris.txt
           else echo "file is empty"; fi
       
