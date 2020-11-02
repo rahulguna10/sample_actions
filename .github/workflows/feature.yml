@@ -66,7 +66,6 @@ jobs:
           ls -al
           echo "cat polaris-files-to-scan.txt"
           cat polaris-files-to-scan.txt
-          if [ -s "polaris-files-to-scan.txt" ]; then echo "files changed"; else echo "file is empty"; fi
       
       - name: find changed files
         run: |
