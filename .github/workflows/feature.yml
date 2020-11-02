@@ -61,10 +61,13 @@ jobs:
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-          echo $FILES | tr " " "\n" | egrep '[.jsp]$' > "polaris-files-to-scan.txt"
+          echo $FILES | tr " " "\n" | egrep '[.java]$' > "polaris-files-to-scan.txt"
+          touch hello.txt
+          ls -al
           echo "cat polaris-files-to-scan.txt"
           cat polaris-files-to-scan.txt
           if [ -s "polaris-files-to-scan.txt" ]; then echo "files changed"; else echo "file is empty"; fi
+          if [ -s "hello.txt" ]; then echo "files changed"; else echo "file is empty"; fi
       
       - name: find changed files
         run: |
