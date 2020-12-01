@@ -24,6 +24,9 @@ function github_pipeline () {
 	echo $GITHUB_REPOSITORY
 	echo $GITHUB_REF
 	echo $GITHUB_EVENT_NAME
+	
+	git_repo = $GITHUB_REPOSITORY
+	echo $git_repo
 }
 
 function bitbucket_pipeline () {
