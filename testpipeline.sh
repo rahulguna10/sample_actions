@@ -22,6 +22,8 @@ function github_pipeline () {
 	echo %PATH%
 	echo %GITHUB_WORKFLOW%
 	echo %GITHUB_API_URL%
+	echo hello
+	echo $GITHUB_API_URL
 }
 
 function bitbucket_pipeline () {
