@@ -38,4 +38,5 @@ jobs:
           echo ${{github.event_name}}
           echo ${{github.event_path}}
           echo ${{github.event}}
+          echo ${{GITHUB_API_URL}}
           
