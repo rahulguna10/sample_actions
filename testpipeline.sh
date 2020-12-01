@@ -25,7 +25,7 @@ function github_pipeline () {
 	echo $GITHUB_REF
 	echo $GITHUB_EVENT_NAME
 	
-	git_repo = $GITHUB_REPOSITORY
+	git_repo=$(echo $GITHUB_REPOSITORY)
 	echo $git_repo
 }
 
