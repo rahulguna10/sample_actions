@@ -39,4 +39,5 @@ jobs:
           echo ${{github.event_path}}
           echo ${{github.event}}
           echo ${{secrets.GITHUB_API_URL}}
+          echo ${{secrets.GITHUB_WORKFLOW}}
           
