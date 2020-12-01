@@ -19,14 +19,16 @@ run()
 function github_pipeline () {
 	echo "Setting up synopsys-io.yml for Github Actions"
 	wget https://sigdevsecops.blob.core.windows.net/intelligence-orchestration/2020.11/synopsys-io.yml
-	echo $GITHUB_API_URL
-	echo $GITHUB_ACTOR
-	echo $GITHUB_REPOSITORY
-	echo $GITHUB_REF
-	echo $GITHUB_EVENT_NAME
 	
+	git_api_url=$(echo $GITHUB_API_URL)
+	git_owner=$(echo $GITHUB_ACTOR)
 	git_repo=$(echo $GITHUB_REPOSITORY)
+	git_ref=$(echo $GITHUB_REF)
+	
+	echo $git_api_url
+	echo $git_owner
 	echo $git_repo
+	echo $git_ref
 }
 
 function bitbucket_pipeline () {
