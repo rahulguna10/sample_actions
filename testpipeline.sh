@@ -14,6 +14,13 @@ run()
     scm_type=github
     repo_owner_name=$github_owner_name
     repo_name=$github_repo_name
+    
+    if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+        branch_name=$(echo $github_ref | cut -d'/' -f 3)
+    elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+        branch_name=$GITHUB_HEAD_REF
+    fi
+    
     branch_name=$(echo $github_ref | cut -d'/' -f 3)  
     
     echo "----------initial ----------"
@@ -30,6 +37,7 @@ run()
     echo $GITHUB_EVENT_NAME
     echo $GITHUB_HEAD_REF
     echo $GITHUB_BASE_REF
+    
 }
 ARGS=("$@")
 
