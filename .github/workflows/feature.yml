@@ -28,7 +28,7 @@ jobs:
           ./testpipeline.sh
       
       # Runs a set of commands using the runners shell
-      - name: Main Branch - Run a multi-line script
+      - name: Main Branch - Run a multi-line scripts
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
