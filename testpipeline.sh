@@ -21,8 +21,6 @@ run()
         branch_name=$GITHUB_HEAD_REF
     fi
     
-    branch_name=$(echo $github_ref | cut -d'/' -f 3)  
-    
     echo "----------initial ----------"
     echo $github_ref
     
