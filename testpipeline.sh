@@ -17,11 +17,9 @@ run()
     
     if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
         branch_name=$(echo $github_ref | cut -d'/' -f 3)
-    elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+    elif [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
         branch_name=$GITHUB_HEAD_REF
     fi
-    
-    branch_name=$(echo $github_ref | cut -d'/' -f 3)  
     
     echo "----------initial ----------"
     echo $github_ref
