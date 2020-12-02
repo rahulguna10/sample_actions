@@ -23,7 +23,7 @@ jobs:
 
       # Runs a single command using the runners shell
 
-      - name: Main Branch - Run a one-line scripts
+      - name: Main Branch - Run a one-line script
         run: |
           chmod +x ./testpipeline.sh
           ./testpipeline.sh
