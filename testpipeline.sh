@@ -27,9 +27,9 @@ run()
     echo "$branch_name"
     
     echo "------------ Additional -----------"
-    echo $(GITHUB_EVENT_NAME)
-    echo $(GITHUB_HEAD_REF)
-    echo $(GITHUB_BASE_REF)
+    echo $GITHUB_EVENT_NAME
+    echo $GITHUB_HEAD_REF
+    echo $GITHUB_BASE_REF
 }
 ARGS=("$@")
 
