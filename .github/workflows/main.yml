@@ -44,4 +44,5 @@ jobs:
           echo $GITHUB_WORKFLOW
           echo $GITHUB_REPOSITORY
           echo $GITHUB_SHA
+          echo $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           
