@@ -42,4 +42,6 @@ jobs:
           echo ${{github.event}}
           echo $GITHUB_API_URL
           echo $GITHUB_WORKFLOW
+          echo ${GITHUB_REPOSITORY}
+          echo ${{GITHUB_SHA}}
           
