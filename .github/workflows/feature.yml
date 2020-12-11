@@ -48,3 +48,5 @@ jobs:
           echo $GITHUB_SHA
           echo $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo $GITHUB_REPOSITORY/$GITHUB_SHA
+          echo https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")/files
+          echo https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA
