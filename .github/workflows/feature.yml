@@ -49,18 +49,18 @@ jobs:
           echo $(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
           echo $GITHUB_REPOSITORY/$GITHUB_SHA
           echo https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")/files
-          echo https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA
+          echo https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$GITHUB_SHA > my_sample.txt
           
-      #- name: 'Upload Artifact'
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: my-sample
-      #    path: my_sample.txt
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-sample
+          path: my_sample.txt
       
       - name: Download a single artifact
         uses: actions/download-artifact@v2
         with:
           name: my-sample
       
-      - name: Main Branch - Run a one-line script
+      - name: Print File
         run: echo my_sample.txt
