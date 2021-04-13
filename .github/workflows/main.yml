@@ -35,6 +35,7 @@ jobs:
           echo ${{github.head_ref}}
           echo ${{github.ref}}
           echo ${GITHUB_REF##*/}
+          echo ${GITHUB_REPOSITORY}
           echo ${{github.repository_owner}}
           echo ${{github.repository}}
           echo ${{github.event}}
