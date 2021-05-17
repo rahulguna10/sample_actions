@@ -46,3 +46,9 @@ jobs:
           echo $GITHUB_WORKFLOW
           echo $GITHUB_REPOSITORY
           echo $GITHUB_SHA
+      
+      - name: Upload SARIF Report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          # Path to SARIF file relative to the root of the repository
+          sarif_file: old_report.sarif.json
