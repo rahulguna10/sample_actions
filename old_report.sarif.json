@@ -1,0 +1,306 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Synopsys Workflow Engine Report",
+          "rules": [
+            {
+              "id": "20",
+              "shortDescription": {
+                "text": "CWE-20: filesystem path, filename, or uri manipulation"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/20.html",
+              "help": {
+                "text": "cwe-20 : The product receives input or data, but it does not validate or incorrectly validates that the input has the properties that are required to process the data safely and correctly."
+              },
+              "properties": {
+                "category": "Improper Input Validation"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "141",
+              "shortDescription": {
+                "text": "CWE-141: sql injection"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/141.html",
+              "help": {
+                "text": "cwe-141 : The software receives input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could be interpreted as parameter or argument delimiters when they are sent to a downstream component."
+              },
+              "properties": {
+                "category": "Improper Neutralization of Parameter/Argument Delimiters"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "352",
+              "shortDescription": {
+                "text": "CWE-352: cross-site request forgery"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/352.html",
+              "help": {
+                "text": "cwe-352 : The web application does not, or can not, sufficiently verify whether a well-formed, valid, consistent request was intentionally provided by the user who submitted the request."
+              },
+              "properties": {
+                "category": "Cross-Site Request Forgery (CSRF)"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "404",
+              "shortDescription": {
+                "text": "CWE-404: resource leak"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/404.html",
+              "help": {
+                "text": "cwe-404 : The program does not release or incorrectly releases a resource before it is made available for re-use."
+              },
+              "properties": {
+                "category": "Improper Resource Shutdown or Release"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "502",
+              "shortDescription": {
+                "text": "CWE-502: unsafe deserialization"
+              },
+              "helpUri": "https://cwe.mitre.org/data/definitions/502.html",
+              "help": {
+                "text": "cwe-502 : The application deserializes untrusted data without sufficiently verifying that the resulting data will be valid."
+              },
+              "properties": {
+                "category": "Deserialization of Untrusted Data"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "level": "error",
+          "message": {
+            "text": "A user-controllable string is used as part or all of a filesystem path, filename, or URI (uniform resource identifier). Path manipulation vulnerabilities can be addressed by proper input validation. Disallowing directory traversal characters (using a deny list) can improve the safety of the input, but the recommended approach is to restrict to a specific set of allowed characters (using an allow list). This should exclude absolute paths and upward directory traversal."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/facade/StorageFacadeImpl.java"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ],
+          "ruleId": "20"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "Untrusted user-supplied data is inserted into a SQL statement without adequate validation, escaping, or filtering. Perform one of the following to guard against SQL string injection attacks with JDBC.\n* Refactor the JDBC code to use the \"PreparedStatement\" API instead of \"Statement\".\n* Add a positional parameter to the SQL statement using \"?\".\n* Bind the tainted value to the parameter using the \"setString\" method: \"PreparedStatement.setString(1, \"\"number\"\")\".\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/dao/ActivityDaoImpl.java"
+                },
+                "region": {
+                  "startLine": 20
+                }
+              }
+            }
+          ],
+          "ruleId": "141"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "Untrusted user-supplied data is inserted into a context that can execute JavaScript without adequate validation, escaping, or filtering. Perform the following escaping in the following order to guard against cross-site scripting attacks with EL.\n\nFor example: \"fn:escapeXml(transferbean.description)\"\n\n\n* Use the EL function \"fn:escapeXml\". This escapes the output for HTML.\n\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/webapp/WEB-INF/jsp/transferCheck.jsp"
+                },
+                "region": {
+                  "startLine": 109
+                }
+              }
+            }
+          ],
+          "ruleId": "141"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "The web application controller modifies data or state and is unprotected from cross-site request forgery. Protection against CSRF attacks involves several steps.\n\n1. Generate a cryptographically random token that is associated with a user's session.  The java.security.SecureRandom class is well suited for this purpose.\n2. Pass this token with any requests that should be protected from cross-site requests that originate from malicious code running in a user's browser.\n3. Reject any requests that have a missing or invalid token, for example by adding a CSRF filter to the servlet filter chain."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/controllers/TransferController.java"
+                },
+                "region": {
+                  "startLine": 128
+                }
+              }
+            }
+          ],
+          "ruleId": "352"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "Leak of a system resource"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/bean/FileUntrustedParent.java"
+                },
+                "region": {
+                  "startLine": 50
+                }
+              }
+            }
+          ],
+          "ruleId": "404"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "Untrusted user-supplied data is inserted into a SQL statement without adequate validation, escaping, or filtering. Perform one of the following to guard against SQL string injection attacks with JDBC.\n* Refactor the JDBC code to use the \"PreparedStatement\" API instead of \"Statement\".\n* Add a positional parameter to the SQL statement using \"?\".\n* Bind the tainted value to the parameter using the \"setString\" method: \"PreparedStatement.setString(1, \"\"username\"\")\".\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/dao/AccountDaoImpl.java"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ],
+          "ruleId": "141"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "The web application controller modifies data or state and is unprotected from cross-site request forgery. Protection against CSRF attacks involves several steps.\n\n1. Generate a cryptographically random token that is associated with a user's session.  The java.security.SecureRandom class is well suited for this purpose.\n2. Pass this token with any requests that should be protected from cross-site requests that originate from malicious code running in a user's browser.\n3. Reject any requests that have a missing or invalid token, for example by adding a CSRF filter to the servlet filter chain."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/controllers/TransferController.java"
+                },
+                "region": {
+                  "startLine": 66
+                }
+              }
+            }
+          ],
+          "ruleId": "352"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "Leak of a system resource"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/bean/FileUntrustedParent.java"
+                },
+                "region": {
+                  "startLine": 50
+                }
+              }
+            }
+          ],
+          "ruleId": "404"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "Untrusted user-supplied data is inserted into a context that can execute JavaScript without adequate validation, escaping, or filtering. Perform the following escaping in the following order to guard against cross-site scripting attacks with Java.\n\nFor example: \"Escape.html(file)\"\n\n\n* Use the \"Escape.html\" function from the Coverity Sanitizers Library. This escapes the output for HTML.\n\n"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/controllers/DashboardController.java"
+                },
+                "region": {
+                  "startLine": 148
+                }
+              }
+            }
+          ],
+          "ruleId": "141"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "A user-controllable string is used as part or all of a filesystem path, filename, or URI (uniform resource identifier). Path manipulation vulnerabilities can be addressed by proper input validation. Disallowing directory traversal characters (using a deny list) can improve the safety of the input, but the recommended approach is to restrict to a specific set of allowed characters (using an allow list). This should exclude absolute paths and upward directory traversal."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/facade/StorageFacadeImpl.java"
+                },
+                "region": {
+                  "startLine": 18
+                }
+              }
+            }
+          ],
+          "ruleId": "20"
+        },
+        {
+          "level": "error",
+          "message": {
+            "text": "A user-controllable string is deserialized. If possible, use pure data formats such as JSON or XML to serialize and deserialize untrusted data.  Otherwise, if you must use native serialization methods, check the integrity of the data (for example with HMAC) before deserializing it."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/main/java/com/example/controllers/DashboardController.java"
+                },
+                "region": {
+                  "startLine": 144
+                }
+              }
+            }
+          ],
+          "ruleId": "502"
+        }
+      ]
+    }
+  ]
+}
